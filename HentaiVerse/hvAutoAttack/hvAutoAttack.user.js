@@ -74,11 +74,13 @@ let other = isIsekai ? 'persistent' : 'isekai';
   }
   unsafeWindow = typeof unsafeWindow === 'undefined' ? window : unsafeWindow;
   if (gE('#riddlecounter')) { // 需要答题
-    if (g('option').riddlePopup && !window.opener) {
-      window.open(window.location.href, 'riddleWindow', 'resizable,scrollbars,width=1241,height=707');
-    } else {
-      riddleAlert(); // 答题警报
-    }
+console.log("riddle");
+riddleAlert();
+      //if (g('option').riddlePopup && !window.opener) {
+     // window.open(window.location.href, 'riddleWindow', 'resizable,scrollbars,width=1241,height=707');
+    //} else {
+     // riddleAlert(); // 答题警报
+    //}
   } else if (!gE('#navbar')) { // 战斗中
     const box2 = gE('#battle_main').appendChild(cE('div'));
     box2.id = 'hvAABox2';
@@ -354,7 +356,7 @@ function addStyle(lang) { // CSS
   const cssContent = [
     // hvAA
     'l0,l1,l01,l2{display:none;}', // l0: 简体 l1: 繁体 l01:简繁体共用 l2: 英文
-    '#hvAABox2{position:absolute;left:1075px}',
+    '#hvAABox2{position:absolute;left:1075px;top:60%}',
     '.hvAALog{font-size:20px;}',
     '.hvAAButton{top:4px;left:1250px;position:absolute;z-index:9999;cursor:pointer;width:24px;height:24px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAADi0lEQVRIiZVWPYgUZxj+dvGEk7vsNdPYCMul2J15n+d991PIMkWmOEyMyRW2FoJIUojYp5ADFbZJkyISY3EqKGpgz+Ma4bqrUojICaIsKGIXSSJcsZuD3RT3zWZucquXDwYG5n2f9/d5vnFuHwfAZySfAXgN4DXJzTiOj+3H90OnkmXZAe/9FMm3JJ8AuBGepyRfle2yLDvgnKt8EDVJkq8B3DGzjve+1m63p0n2AVzJbUh2SG455yre+5qZ/aCq983sxMfATwHYJvlCVYckHwFYVdURgO8LAS6RHJJcM7N1VR0CeE5yAGBxT3AR+QrA3wA20tQOq+pFkgOS90Tk85J51Xs9qaorqjoAcC6KohmSGyQHcRx/kbdv7AHgDskXaWqH0zSddc5Voyia2SOXapqmswsLvpam6ez8/Pwn+YcoimYAvARw04XZ5N8qZtZR1aGqXnTOVSd0cRd42U5EzqvqSFWX2u32tPd+yjnnXNiCGslHJAf7ybwM7r2vAdgWkYdZls157w+NK/DeT7Xb7WkAqyTvlZHjOD5oxgtmtqrKLsmze1VJsquqKwsLO9vnnKvkJHpLsq+qo/JAd8BtneTvqvqTiPwoIu9EZKUUpGpmi2Y2UtU+yTdJkhx1JJ8FEl0pruK/TrwA4F2r1WrkgI1G4wjJP0XkdLF9WaZzZnZZVa8GMj5xgf43JvXczFZbLb1ebgnJn0nenjQbEVkG0JsUYOykyi6Aa+XoQTJuTRr8OADJzVBOh+SlckYkz5L8Q0TquXOj0fhURN6r6pkSeAXAUsDaJPnYxXF8jOQrklskh97ryZJTVURWAPwF4DqAX0TkvRl/zTKdK2aeJMnxICFbAHrNZtOKVVdIrrVa2t1jz6sicprkbQC3VPVMGTzMpQvgQY63i8lBFddVdVCk/6TZlMFzopFci+P44H+YHCR3CODc/wUvDPY7ksMg9buZrKr3ATwvyoT3vrafzPP3er1eA9Azs7tjJhcqOBHkeSOKohkROR9K7prZYqnnlSRJjofhb4vIt/V6vUbyN1Xtt1qtb1zpZqs45xyAxXAnvCQ5FJGHqrpiZiMzu5xnHlZxCOABybXw3gvgp/Zq3/gA+BLATVVdyrJsbods2lfVq7lN4crMtapjZndD5pPBixWFLTgU7uQ3AJ6KyLKILAdy9sp25bZMBC//JSRJcjQIYg9Aj+TjZrNp+/mb+Ad711sdZZ1k/QAAAABJRU5ErkJggg==) center no-repeat transparent;}',
     '#hvAABox{left:calc(619px - 350px);top:calc(min(100%, 1094px)*0.5 - 269px);font-size:16px!important;z-index:4;width:700px;height:538px;position:absolute;text-align:left;background-color:#E3E0D1;border:1px solid #000;border-radius:10px;font-family:"Microsoft Yahei";}',
@@ -1286,7 +1288,7 @@ function setAudioAlarm(e) { // 发出音频警报
     audio.pause();
     document.removeEventListener(e.type, pauseAudio, true);
   }
-  document.addEventListener('mousemove', pauseAudio, true);
+//  document.addEventListener('mousemove', pauseAudio, true);
 }
 
 function setNotification(e) { // 发出桌面通知
@@ -1461,12 +1463,16 @@ function checkCondition(parms) {
 }
 // 答题//
 function riddleAlert() { // 答题警报
-  if (window.opener) {
-    gE('#riddleanswer+img').onclick = function () {
-      riddleSubmit(gE('#riddleanswer').value);
-    };
-  }
+//  if (window.opener) {
+//    gE('#riddleanswer+img').onclick = function () {
+//      riddleSubmit(gE('#riddleanswer').value);
+//    };
+//  }
+
+  // jc: play alarm only
   setAlarm('Riddle');
+  return;
+
   const answers = ['A', 'B', 'C'];
   document.onkeydown = function (e) {
     gE('#hvAAAlert-Riddle').pause();
@@ -1912,7 +1918,9 @@ function reloader() {
       } else if (g('roundNow') === g('roundAll')) { // Victory
         setAlarm('Victory');
         delValue(2);
-        setTimeout(goto, 3 * 1000);
+
+        // jc: no auto-complete battle
+        //setTimeout(goto, 3 * 1000);
       }
     } else {
       main();
@@ -2114,7 +2122,7 @@ function battleInfo() { // 战斗战况
     `<br>Speed: ${g('runSpeed')} t/s`,
     `<br>Round: ${g('roundNow')}/${g('roundAll')}`,
     `<br><l0>攻击模式</l0><l1>攻擊模式</l1><l2>Attack Mode</l2>: ${status[g('attackStatus')]}`,
-    `<br><l0>敌人</l0><l1>敌人</l1><l2>Monsters</l2>: ${g('monsterAlive')}/${g('monsterAll')}`,
+    `<br><l0>敌人</l0><l1>敵人</l1><l2>Monsters</l2>: ${g('monsterAlive')}/${g('monsterAll')}`,
     `<br><l0>战役模式</l0><l1>戰役模式</l1><l2>Type</l2>: ${battleInfoType(g('roundType'))}`, // 战役模式显示
   ].join('');
   document.title = `${g('turn')}||${g('runSpeed')}||${g('roundNow')}/${g('roundAll')}||${g('monsterAlive')}/${g('monsterAll')}`;
@@ -2604,7 +2612,7 @@ function autoSkill() {
   const skillLib = {
     OFC: {
       id: '1111',
-      oc: 8,
+      oc: 4, //8,
     },
     FRD: {
       id: '1101',
